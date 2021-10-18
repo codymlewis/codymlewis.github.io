@@ -8,76 +8,11 @@
         <meta name="referrer" content="origin">
         <meta name="author" content="Cody Lewis" />
         <link rel="shortcut icon" href='favicon.ico' />
+        <link rel="stylesheet" href="style.css" />
         <script src="https://kit.fontawesome.com/a5f29bc320.js" crossorigin="anonymous"></script>
+        <script src="write_text.js"></script>
     </head>
     <body>
-        <style>
-            :root {
-                --link-color: #0084ff;
-                --white: #ffffff;
-                --black: #000000;
-            }
-
-            body {
-                display: block;
-                font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
-                background-color: var(--white);
-                margin: 0px;
-            }
-
-            p {
-                text-align: center;
-            }
-
-            #content {
-                padding-left: 30%;
-                padding-right: 30%;
-            }
-
-
-            .logo {
-                padding: 2%;
-            }
-
-            a {
-                color: var(--link-color);
-                text-decoration: none;
-            }
-
-            div#video {
-                background-color: var(--black);
-                text-align: center;
-                padding-bottom: 1%;
-            }
-
-            video {
-                margin-left: auto;
-                margin-right: auto;
-                width: 50%;
-                display: block;
-            }
-
-            #video-overlay {
-                font: 24px "Fira Code", "hack", monospace;
-                color: white;
-            }
-
-            @media only screen and (max-width: 1200px) {
-                #content {
-                    padding-left: 5%;
-                    padding-right: 5%;
-                }
-
-                video {
-                    width: 100%;
-                }
-
-                #video-overlay {
-                    font-size: 20px;
-                }
-            }
-        </style>
-
         <div id="video">
             <video playsinline autoplay muted loop>
                 <source src="video.mp4" type="video/mp4">
@@ -111,22 +46,5 @@
                 </span>
             </p>
         </div>
-        <script>
-            var titleText = "";
-            var splitTitle = "Cody M. Lewis".split('');
-            i = 0;
-            var intervalId = setInterval(
-                () => {
-                    titleText += splitTitle[i];
-                    document.getElementById("video-overlay").innerText = titleText + "|";
-                    i++;
-                    if (i >= splitTitle.length) {
-                        document.getElementById("video-overlay").innerText = titleText;
-                        clearInterval(intervalId);
-                    }
-                },
-                100
-            )
-        </script>
     </body>
 </html>
