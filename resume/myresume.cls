@@ -33,6 +33,7 @@
 
 \newcommand{\sectionpart}[1]{
     \Large{\scshape{#1}} \titlerule \\ \normalsize \raggedright
+    \vspace{0.5em}
 }
 
 \newcommand{\skill}[2]{
