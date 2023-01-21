@@ -1,3 +1,8 @@
 *.log
 *.aux
 *.out
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+tags

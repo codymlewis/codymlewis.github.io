@@ -13,6 +13,9 @@
 \RequirePackage{tabularx}
 \RequirePackage{hyperref}
 
+\RequirePackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
 \hypersetup{
     colorlinks = true,
     linkcolor = blue,
