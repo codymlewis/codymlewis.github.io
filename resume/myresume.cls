@@ -4,12 +4,9 @@
 \LoadClass{article}
 
 \RequirePackage{titlesec}
-\RequirePackage{graphicx}
 \RequirePackage[margin=0.85in]{geometry}
-\RequirePackage{float}
 \RequirePackage[english]{babel}
 \RequirePackage{url}
-\RequirePackage{booktabs}
 \RequirePackage{tabularx}
 \RequirePackage{hyperref}
 
