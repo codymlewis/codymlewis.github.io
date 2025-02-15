@@ -9,6 +9,7 @@
 \RequirePackage{url}
 \RequirePackage{tabularx}
 \RequirePackage{hyperref}
+\RequirePackage{lmodern}
 
 \RequirePackage{etoolbox}
 \patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
