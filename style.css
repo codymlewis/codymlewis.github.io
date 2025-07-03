@@ -15,11 +15,14 @@ p {
     text-align: center;
 }
 
+.align-left {
+	text-align: left;
+}
+
 #content {
     padding-left: 30%;
     padding-right: 30%;
 }
-
 
 .logo {
     padding: 2%;
