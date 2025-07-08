@@ -8,6 +8,7 @@ body {
     display: block;
     font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
     background-color: var(--white);
+    color: var(--black);
     margin: 0px;
 }
 
@@ -16,7 +17,7 @@ p {
 }
 
 .align-left {
-	text-align: left;
+    text-align: left;
 }
 
 #content {
@@ -63,5 +64,12 @@ video {
 
     #video-overlay {
         font-size: 20px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #181a1b;
+        color: var(--white);
     }
 }
