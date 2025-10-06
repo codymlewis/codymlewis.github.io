@@ -2,6 +2,7 @@
     --link-color: #0084ff;
     --white: #ffffff;
     --black: #000000;
+    --grey: #333333;
 }
 
 body {
@@ -52,6 +53,50 @@ video {
     color: white;
 }
 
+nav ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    background-color: var(--grey);
+}
+
+nav ul li a {
+    display: block;
+    color: var(--white);
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: var(--black);
+}
+
+div#bio {
+    display: flex;
+    align-items: center;
+    gap: 1%;
+}
+
+div#bio p {
+    width: 89%;
+}
+
+div#bio img {
+    width: 10%;
+}
+
+div#publications ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+div#publications ul li {
+    padding-bottom: 1%;
+}
+
 @media only screen and (max-width: 1200px) {
     #content {
         padding-left: 5%;
@@ -64,6 +109,12 @@ video {
 
     #video-overlay {
         font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 2000px) {
+    div#bio img {
+	width: 20%;
     }
 }
 
