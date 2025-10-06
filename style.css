@@ -35,22 +35,23 @@ a {
     text-decoration: none;
 }
 
-div#video {
+div#animation {
     background-color: var(--black);
     text-align: center;
-    padding-bottom: 1%;
+    padding-bottom: 5px;
 }
 
-video {
+canvas#neural-network {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+    height: 40%;
     display: block;
 }
 
-#video-overlay {
+#title {
     font: 24px "Fira Code", "hack", monospace;
-    color: white;
+    color: var(--white);
 }
 
 nav ul {
@@ -103,11 +104,11 @@ div#publications ul li {
         padding-right: 5%;
     }
 
-    video {
-        width: 100%;
+    canvas#neural-network {
+        width: 95%;
     }
 
-    #video-overlay {
+    #animation {
         font-size: 20px;
     }
 }

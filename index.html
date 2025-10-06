@@ -9,14 +9,13 @@
         <meta name="author" content="Cody Lewis" />
         <link rel="shortcut icon" href='favicon.ico' />
         <link rel="stylesheet" href="style.css" />
-        <script src="write_text.js"></script>
+        <script src="scripts/write_text.js" defer></script>
+        <script src="scripts/neural_network_animation.js" defer></script>
     </head>
     <body>
-        <div id="video">
-            <video height="500" playsinline autoplay muted loop>
-                <source src="video.mp4" type="video/mp4">
-            </video>
-            <span id="video-overlay">|</span>
+        <div id="animation">
+            <canvas id="neural-network">An animated visualisation of a neural network's activations</canvas>
+            <span id="title">|</span>
         </div>
         <nav>
             <ul>
@@ -79,16 +78,16 @@ Cyber-Physical Systems, 2025, Just accepted. <a href="https://github.com/codymle
                 <h2>Teaching</h2>
                 <h3>The University of Newcastle, Australia</h3>
                 <ul>
-                    <li>COMP6360 - Data Security - Course Content Development - 2019</li>
-                    <li>SENG2250 - System and Network Security - Teaching Assistance and Marking - 2019-2024</li>
-                    <li>SENG1110 - Introduction to Object Oriented Programming - Teaching Assistance and Marking, 2020-2023</li>
-                    <li>SENG2200 - Programming Languages and Paradigms - Teaching Assistance - 2022</li>
-                    <li>COMP3350 - Advanced Database - Teaching Assistance and Marking - 2021-2023</li>
-                    <li>COMP3260 - Data Security - Teaching Assistance and Marking - 2023-2024</li>
-                    <li>STAT1100 - Data Wrangling and Visualisation - Teaching Assistance, Marking, and Course Content Development - 2023-2024</li>
-                    <li>STAT2110 - Engineering Statistics - Teaching Assistance and Marking - 2023</li>
-                    <li>SENG4500 - Network and Distributed Computing - Teaching Assistance and Marking - 2023</li>
-                    <li>INFT3060 - Cloud Computing - Marking - 2025</li>
+                    <li>COMP6360 – Data Security – Course Content Development – 2019</li>
+                    <li>SENG2250 – System and Network Security – Teaching Assistance and Marking – 2019-2024</li>
+                    <li>SENG1110 – Introduction to Object Oriented Programming – Teaching Assistance and Marking, 2020-2023</li>
+                    <li>SENG2200 – Programming Languages and Paradigms – Teaching Assistance – 2022</li>
+                    <li>COMP3350 – Advanced Database – Teaching Assistance and Marking – 2021-2023</li>
+                    <li>COMP3260 – Data Security – Teaching Assistance and Marking – 2023-2024</li>
+                    <li>STAT1100 – Data Wrangling and Visualisation – Teaching Assistance, Marking, and Course Content Development – 2023-2024</li>
+                    <li>STAT2110 – Engineering Statistics – Teaching Assistance and Marking – 2023</li>
+                    <li>SENG4500 – Network and Distributed Computing – Teaching Assistance and Marking – 2023</li>
+                    <li>INFT3060 – Cloud Computing – Marking – 2025</li>
                 </ul>
             </div>
 
