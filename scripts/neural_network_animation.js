@@ -59,8 +59,9 @@ class NNGraph {
         const max_layer_size = Math.max(...nn.layer_sizes);
         const node_h_gap = Math.round((padded_canvas_height * 0.9) / max_layer_size);
         this.node_radius = Math.round(node_h_gap * 0.75 / 2);
-        const node_w_gap = Math.round((canvas.width - (2 * this.node_radius)) / (nn.layer_sizes.length - 1));
-        const start_w = this.node_radius;
+        const w_pad = canvas.width * 0.01;
+        const node_w_gap = Math.round((canvas.width - (2 * this.node_radius + 2 * w_pad)) / (nn.layer_sizes.length - 1));
+        const start_w = this.node_radius + w_pad;
 
         this.nodes = [];
         for (var i = 0; i < nn.layer_sizes.length; i++) {
