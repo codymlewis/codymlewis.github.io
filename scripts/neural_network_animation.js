@@ -53,7 +53,7 @@ class NeuralNetwork {
 }
 
 class NNGraph {
-    constructor(canvas, nn) {
+    constructor(canvas, nn, total_edge_iters) {
         this.default_colour = this.floatToColourString(0.0);
         const padded_canvas_height = canvas.height * 0.8;
         const max_layer_size = Math.max(...nn.layer_sizes);
@@ -74,6 +74,7 @@ class NNGraph {
                 });
             }
         }
+        this.total_edge_iters = total_edge_iters;
     }
 
     floatToColourString(value) {
@@ -86,7 +87,7 @@ class NNGraph {
     }
 
 
-    draw(ctx, colour_type, colour_layer, colour_data) {
+    draw(ctx, colour_type, colour_layer, colour_data, edge_iter=null) {
         for (var current_layer = 0; current_layer < this.nodes.length - 1; current_layer++) {
             for (var cl_node = 0; cl_node < this.nodes[current_layer].length; cl_node++) {
                 for (var nl_node = 0; nl_node < this.nodes[current_layer + 1].length; nl_node ++) {
@@ -95,13 +96,28 @@ class NNGraph {
                     ctx.moveTo(current_layer_node.x, current_layer_node.y);
                     var next_layer_node = this.nodes[current_layer + 1][nl_node];
                     ctx.lineTo(next_layer_node.x, next_layer_node.y);
-                    if (colour_data != null && colour_type === "edge" && colour_layer === current_layer) {
-                        ctx.strokeStyle = this.floatToColourString(colour_data[cl_node][nl_node]);
-                    } else {
-                        ctx.strokeStyle = this.default_colour;
-                    }
+                    ctx.strokeStyle = this.default_colour;
                     ctx.lineWidth = 3;
                     ctx.stroke();
+
+                    // Apply colour to only a part of the edge
+                    if (colour_data != null && colour_type === "edge" && colour_layer === current_layer && edge_iter != null) {
+                        ctx.beginPath();
+                        var x_grad = (next_layer_node.x - current_layer_node.x) / this.total_edge_iters;
+                        var y_grad = (next_layer_node.y - current_layer_node.y) / this.total_edge_iters;
+                        ctx.moveTo(
+                            current_layer_node.x + edge_iter * x_grad,
+                            current_layer_node.y + edge_iter * y_grad
+                        );
+                        ctx.lineTo(
+                            current_layer_node.x + (edge_iter + 1) * x_grad,
+                            current_layer_node.y + (edge_iter + 1) * y_grad
+                        );
+                        ctx.strokeStyle = this.floatToColourString(colour_data[cl_node][nl_node]);
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+                    }
+
                 }
             }
         }
@@ -281,38 +297,53 @@ let NNAnimation = {
         const ctx = canvas.getContext("2d");
         const dpr = window.devicePixelRatio;
         const rect = canvas.getBoundingClientRect();
+        const total_edge_iters = 10;
+        const total_node_iters = 2;
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
         canvas.style.width = `${rect.width}px`;
         canvas.style.height = `${rect.height}px`;
 
         let nn = new NeuralNetwork([4, 6, 5, 3]);
-        let graph = new NNGraph(canvas, nn);
+        let graph = new NNGraph(canvas, nn, total_edge_iters);
 
         graph.draw(ctx);
-        const total_iterations = this.dataset.length * (2 * nn.layer_sizes.length - 1);
+        const total_iterations = this.dataset.length * (2 * nn.layer_sizes.length - 1 + total_edge_iters + total_node_iters);
         var i = 0;
         var current_layer = 0;
-        var act_type = "edge";
+        var act_type = "node";
+        const num_layers = nn.layer_sizes.length;
+        var ds_idx = 0;
+        var current_sample = this.dataset[ds_idx];
+        var edge_iter = 0;
+        var node_iter = 0;
 
         setInterval(
             () => {
-                if (act_type === "edge") {
-                    act_type = "node";
-                } else {
-                    act_type = "edge";
-                }
-                var current_sample = this.dataset[i % (2 * nn.layer_sizes.length - 1)];
-                graph.draw(ctx, act_type, current_layer, nn.forward(current_sample, act_type, current_layer));
+                graph.draw(ctx, act_type, current_layer, nn.forward(current_sample, act_type, current_layer), edge_iter);
                 i = (i + 1) % total_iterations;
-                if (current_layer === nn.layer_sizes.length - 1) {
-                    act_type = "edge";
+                if (current_layer === num_layers - 1 && node_iter === total_node_iters - 1) {
+                    act_type = "node";
                     current_layer = 0;
+                    ds_idx += 1;
+                    current_sample = this.dataset[ds_idx];
+                    node_iter = 0;
                 } else if (act_type === "edge") {
-                    current_layer += 1;
+                    if (edge_iter === total_edge_iters - 1) {
+                        current_layer += 1;
+                        edge_iter = 0;
+                        act_type = "node";
+                    }
+                    edge_iter += 1;
+                } else {
+                    node_iter += 1;
+                    if (node_iter === total_node_iters) {
+                        act_type = "edge";
+                        node_iter = 0;
+                    }
                 }
             },
-            150
+            75
         );
     }
 
