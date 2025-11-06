@@ -47,6 +47,7 @@ canvas#neural-network {
     width: 50%;
     height: 40%;
     display: block;
+    image-rendering: crisp-edges;
 }
 
 #title {

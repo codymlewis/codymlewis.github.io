@@ -79,7 +79,7 @@ class NNGraph {
 
     floatToColourString(value) {
         const max_val = 0xffffff;
-        const mid_val = 0xcccccc;
+        const mid_val = 0x555555;
         const colour_val = Math.max(0, Math.round(value * (max_val - mid_val) + mid_val));
         var colour_code = colour_val.toString(16);
         colour_code = "#" + colour_code.padStart(6 - colour_code.length);
@@ -296,7 +296,7 @@ let NNAnimation = {
         const canvas = document.getElementById("neural-network");
         const ctx = canvas.getContext("2d");
         const dpr = window.devicePixelRatio;
-        const rect = canvas.getBoundingClientRect();
+        const rect = canvas.getBoundingClientRect() || 1;
         const total_edge_iters = 10;
         const total_node_iters = 2;
         canvas.width = rect.width * dpr;
