@@ -14,7 +14,7 @@ class NeuralNetwork {
     }
 
     sigmoid(x) {
-        return Math.tanh(x);
+        return 1 / (1 + Math.exp(-x));
     }
 
     forward(x, output_type, output_layer) {
@@ -79,8 +79,8 @@ class NNGraph {
 
     floatToColourString(value) {
         const max_val = 0xffffff;
-        const mid_val = 0x555555;
-        const colour_val = Math.max(0, Math.round(value * (max_val - mid_val) + mid_val));
+        const min_val = 0x555555;
+        const colour_val = Math.max(0, Math.round(value * (max_val - min_val) + min_val));
         var colour_code = colour_val.toString(16);
         colour_code = "#" + colour_code.padStart(6 - colour_code.length);
         return colour_code;
