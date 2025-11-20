@@ -309,7 +309,6 @@ let NNAnimation = {
 
         graph.draw(ctx);
         const total_iterations = this.dataset.length * (2 * nn.layer_sizes.length - 1 + total_edge_iters + total_node_iters);
-        var i = 0;
         var current_layer = 0;
         var act_type = "node";
         const num_layers = nn.layer_sizes.length;
@@ -321,11 +320,10 @@ let NNAnimation = {
         setInterval(
             () => {
                 graph.draw(ctx, act_type, current_layer, nn.forward(current_sample, act_type, current_layer), edge_iter);
-                i = (i + 1) % total_iterations;
                 if (current_layer === num_layers - 1 && node_iter === total_node_iters - 1) {
                     act_type = "node";
                     current_layer = 0;
-                    ds_idx += 1;
+                    ds_idx = (ds_idx + 1) % this.dataset.length;
                     current_sample = this.dataset[ds_idx];
                     node_iter = 0;
                 } else if (act_type === "edge") {
